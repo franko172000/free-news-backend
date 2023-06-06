@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title')->fulltext();
-            $table->text('content');
-            $table->string('featured_image', 255);
-            $table->string('author', 255);
+            $table->text('content')->fulltext();
+            $table->string('featured_image', 255)->nullable();
+            $table->string('author', 255)->nullable();
+            $table->string('source')->nullable();
+            $table->string('content_url');
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
         });

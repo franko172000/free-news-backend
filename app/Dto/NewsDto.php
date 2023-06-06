@@ -11,7 +11,8 @@ class NewsDto extends DataTransferObject
     public string $title;
     public string $content;
     public string $url;
-    public string $author;
-    public string $imagePath;
-    public string $category;
+    public string $source;
+    public ?string $author = null;
+    public ?string $imagePath = null;
+    public ?string $category = null;
 }
