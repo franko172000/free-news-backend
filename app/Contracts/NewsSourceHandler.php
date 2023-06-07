@@ -2,9 +2,7 @@
 
 namespace App\Contracts;
 
-use App\Dto\NewsDto;
-
-interface NewsContract
+interface NewsSourceHandler
 {
     public function getNews(): array;
 }

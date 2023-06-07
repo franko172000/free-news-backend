@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Contracts\NewsContract;
+use App\Contracts\NewsSourceHandler;
 use App\Dto\NewsDto;
 use App\Models\Category;
 use App\Models\News;
@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class NewsService
 {
-    public function __construct(private readonly NewsContract $newsSource){
+    public function __construct(private readonly NewsSourceHandler $newsSource){
     }
 
     public function processNews(): void
@@ -30,7 +30,7 @@ class NewsService
             $categorySlug = Str::slug($news->category);
             $category = Category::updateOrCreate(
                 [
-                'slug' => $categorySlug ],
+                    'slug' => $categorySlug ],
                 [
                     'name' => $news->category
                 ]

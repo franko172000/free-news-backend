@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
     {
         Category::factory(1)->create([
             'name' => 'General',
-            'slug' => Str::slug('name')
+            'slug' => Str::slug('General')
         ]);
     }
 }

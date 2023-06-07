@@ -2,7 +2,7 @@
 
 namespace App\Services\Sources;
 
-use App\Contracts\NewsContract;
+use App\Contracts\NewsSourceHandler;
 use App\Dto\NewsDto;
 use App\Enums\NewsSources;
 use App\Services\NewsAbstractApiService;
@@ -10,7 +10,7 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Arr;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class GuardianService extends NewsAbstractApiService implements NewsContract
+class GuardianService extends NewsAbstractApiService implements NewsSourceHandler
 {
     protected string $baseUrl = 'https://content.guardianapis.com/';
 
