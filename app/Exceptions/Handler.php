@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         if ($request->expectsJson()) {
-            return $this->respondUnAuthorized('Unauthenticated or Token Expired, Please Login');
+            return $this->respondUnAuthorized($exception->getMessage() ?? 'Unauthenticated or Token Expired, Please Login');
         }
 
         return redirect()->guest(route('login'));

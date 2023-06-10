@@ -58,13 +58,13 @@ trait ApiResponseTrait
     /**
      * Respond with success.
      *
-     * @param string $message
-     * @param array  $data
-     * @param int    $statusCode
+     * @param array|null $data
+     * @param string|null $message
+     * @param int $statusCode
      *
      * @return JsonResponse
      */
-    protected function respondSuccess(string $message = 'Ok', int $statusCode = 200, array $data = []): JsonResponse
+    protected function respondSuccess(?array $data = [], ?string $message = 'Ok', int $statusCode = 200): JsonResponse
     {
         $response = [];
 

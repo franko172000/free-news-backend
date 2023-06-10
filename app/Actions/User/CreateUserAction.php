@@ -2,7 +2,7 @@
 
 namespace App\Actions\User;
 
-use App\Business\Actions\Action;
+use App\Actions\Action;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Arr;
@@ -31,7 +31,7 @@ class CreateUserAction extends Action
         $user = User::create([
             'name' => $this->data['name'],
             'email' => $this->data['email'],
-            'password' => Hash::make($this->data['password'])
+            'password' => $this->data['password']
         ]);
 
         return $user->createToken('apiToken')->plainTextToken;

@@ -2,12 +2,7 @@
 
 namespace App\Actions\User;
 
-use App\Business\Actions\Action;
-use App\Models\User;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
+use App\Actions\Action;
 
 class UpdateProfileAction extends Action
 {
@@ -17,8 +12,8 @@ class UpdateProfileAction extends Action
     public function rules(): array
     {
         return [
-            'user.id' => ['integer|required'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'user.id' => ['integer','required'],
+            'email' => ['email', 'max:255'],
             'name' => ['required', 'string'],
         ];
     }

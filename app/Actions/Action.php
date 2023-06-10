@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Business\Actions;
+namespace App\Actions;
 
 use App\Exceptions\ActionValidationException;
 use Illuminate\Support\Facades\Validator;

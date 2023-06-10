@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\User\UpdatePreferenceAction;
 use App\Actions\User\UpdateProfileAction;
+use App\Http\Requests\UpdatePreferenceRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\UserResource;
 use App\Traits\ApiResponseTrait;
@@ -26,7 +28,21 @@ class UserController extends Controller
         ]);
 
         if($status){
-            return $this->respondSuccess("Profile updated");
+            return $this->respondSuccess(message: "Profile updated");
+        }
+        return $this->respondInternalError("Unexpected error. Please try again");
+    }
+
+    public function updatePreference(UpdatePreferenceRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $status = UpdatePreferenceAction::run([
+            'user' => $request->user(),
+            'sources' => $request->input('sources'),
+            'categories' => $request->input('categories')
+        ]);
+
+        if($status){
+            return $this->respondSuccess(message: "Profile updated");
         }
         return $this->respondInternalError("Unexpected error. Please try again");
     }

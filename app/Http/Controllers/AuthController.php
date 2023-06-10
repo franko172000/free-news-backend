@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\User\CreateUserAction;
+use App\Actions\User\LoginUserAction;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Traits\ApiResponseTrait;
@@ -20,12 +21,15 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): \Illuminate\Http\JsonResponse
     {
-        $request->authenticate();
-        $token = $request->user()->createToken(self::TOKEN_NAME)->plainTextToken;
-
-        return $this->respondSuccess("Access token", 200, [
-            'token' => $token
+        $data = $request->validated();
+        $token = LoginUserAction::run([
+            'email' => $data['email'],
+            'password' => $data['password']
         ]);
+
+        return $this->respondSuccess([
+            'token' => $token
+        ],"Access token");
     }
 
     public function register(RegisterRequest $request): \Illuminate\Http\JsonResponse
@@ -33,17 +37,18 @@ class AuthController extends Controller
         $data = $request->validated();
         $token = CreateUserAction::run([
             'email' => $data['email'],
-            'password' => $data['email']
+            'name' => $data['name'],
+            'password' => $data['password']
         ]);
 
-        return $this->respondSuccess("Access token", 200, [
+        return $this->respondSuccess([
             'token' => $token
-        ]);
+        ],"Access token");
     }
 
     public function logout(): \Illuminate\Http\JsonResponse
     {
         request()->user()->tokens()->delete();
-        return $this->respondSuccess("Logout successful!");
+        return $this->respondSuccess(message: "Logout successful!");
     }
 }

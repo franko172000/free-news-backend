@@ -31,9 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'news' => [
-        'news-api' => env('NEWS_API_KEY'),
-        'guardian' => env('GUARDIAN_API_KEY'),
-        'ny-times' => env('NEW_YORK_TIMES_API_KEY')
+        \App\Enums\NewsSources::NEWS_API->value => env('NEWS_API_KEY'),
+        \App\Enums\NewsSources::GUARDIAN->value => env('GUARDIAN_API_KEY'),
+        \App\Enums\NewsSources::NY_TIMES->value => env('NEW_YORK_TIMES_API_KEY')
     ],
 
 ];
