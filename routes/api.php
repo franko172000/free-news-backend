@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\NewsController;
+use \App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use \App\Http\Controllers\NewsController;
 |
 */
 Route::get('news', [NewsController::class, 'index']);
-Route::get('app-settings', [\App\Http\Controllers\AppController::class, 'index']);
+Route::get('app-settings', [AppController::class, 'index']);
 
 Route::prefix('auth/')->group(function(){
     Route::post('login', [AuthController::class, 'login']);

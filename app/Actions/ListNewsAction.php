@@ -43,6 +43,6 @@ class ListNewsAction extends Action
                 $news = $news->whereIn('category_id', $categories);
             }
         }
-        return $news->get();
+        return $news->paginate(20);
     }
 }
