@@ -34,6 +34,7 @@ class NyTimesService extends NewsAbstractApiService implements NewsSourceHandler
                 url: Arr::get($news,'web_url'),
                 imagePath: Arr::get($news,'multimedia.0.url'),
                 category: Arr::get($news,'section_name'),
+                publishedDate: Arr::get($news,'pub_date'),
                 source: NewsSources::NY_TIMES->value
             );
         }

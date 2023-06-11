@@ -6,6 +6,7 @@ use App\Contracts\NewsSourceHandler;
 use App\Dto\NewsDto;
 use App\Models\Category;
 use App\Models\News;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class NewsService
@@ -47,6 +48,7 @@ class NewsService
             'author' => $news->author,
             'source' => $news->source,
             'content_url' => $news->url,
+            'date_published' => $news->publishedDate ? Carbon::parse($news->publishedDate) : $news->publishedDate,
         ]);
     }
 }

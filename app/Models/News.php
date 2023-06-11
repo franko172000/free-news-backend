@@ -17,7 +17,12 @@ class News extends Model
       'author',
       'category_id',
       'source',
-      'content_url'
+      'content_url',
+      'date_published'
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime'
     ];
 
     public function scopeWithImage($query){

@@ -38,6 +38,7 @@ class GuardianService extends NewsAbstractApiService implements NewsSourceHandle
                     url: Arr::get($article,'webUrl'),
                     source: NewsSources::GUARDIAN->value,
                     category: Arr::get($article,'sectionName'),
+                    publishedDate: Arr::get($article,'webPublicationDate')
                 );
             }
         }

@@ -37,7 +37,8 @@ class NewsApiService extends NewsAbstractApiService implements NewsSourceHandler
                 url: Arr::get($article,'url'),
                 imagePath: Arr::get($article,'urlToImage'),
                 source: NewsSources::NEWS_API->value,
-                author: Arr::get($article,'author')
+                author: Arr::get($article,'author'),
+                publishedDate: Arr::get($article,'publishedAt')
             );
         }
         return $formatted;

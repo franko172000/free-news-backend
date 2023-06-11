@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('author', 255)->nullable();
             $table->string('source')->nullable();
             $table->string('content_url');
+            $table->timestamp('date_published')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
         });

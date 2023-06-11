@@ -23,8 +23,7 @@ class ListNewsAction extends Action
     public function execute()
     {
         $news = News::orderBy('created_at','desc')
-            ->with('category')
-            ->withImage('category');
+            ->with('category');
 
         $searchTerm = Arr::get($this->data, 'term');
         $user = Arr::get($this->data, 'user');
