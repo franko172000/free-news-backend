@@ -9,7 +9,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class NewsDto extends DataTransferObject
 {
     public string $title;
-    public string $content;
+    public ?string $content;
     public string $url;
     public string $source;
     public ?string $author = null;

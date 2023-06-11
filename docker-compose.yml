@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+    news-backend-app:
+        build:
+            context: ./docker
+            dockerfile: Dockerfile
+        volumes:
+            - .:/usr/src/app
+        env_file:
+            - ./.env.docker
+        #        entrypoint: sh -c "/tmp/run.sh"
+        networks:
+            - news-backend
+        ports:
+            - '8070:8070'
+        depends_on:
+            mysql-db:
+                condition: service_healthy
+#        command: bash -c "composer install && php artisan migrate --seed && php artisan app:fetch-news &&  php artisan serve --port 8070 --host 0.0.0.0 --env ./.env.docker"
+    mysql-db:
+        platform: linux/x86_64
+        image: mysql:5.7
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - mysqldata:/var/lib/mysql/
+        networks:
+            - news-backend
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+            retries: 3
+            timeout: 5s
+        ports:
+            - '3306:3306'
+
+networks:
+    news-backend:
+        driver: bridge
+volumes:
+    mysqldata:
+        driver: local

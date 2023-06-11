@@ -42,7 +42,7 @@ class NewsService
         News::create([
             'category_id' => $category?->id,
             'title' => $news->title,
-            'content' => $news->content,
+            'content' => $news->content ?? $news->title,
             'featured_image' => $news->imagePath,
             'author' => $news->author,
             'source' => $news->source,

@@ -29,6 +29,7 @@ class FetchNewsCommand extends Command
      */
     public function handle()
     {
+        $this->info('Fetching news...');
         collect([
             GuardianService::class,
             NewsApiService::class,
@@ -36,5 +37,6 @@ class FetchNewsCommand extends Command
         ])->each(function ($source){
             NewsJob::dispatch(new $source);
         });
+        $this->info('Done fetching news');
     }
 }

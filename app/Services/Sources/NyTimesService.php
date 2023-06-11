@@ -29,11 +29,11 @@ class NyTimesService extends NewsAbstractApiService implements NewsSourceHandler
 
         foreach ($data['response']['docs'] as $news){
             $formatted[] = new NewsDto(
-                title: $news['headline']['main'],
-                content: $news['abstract'],
-                url: $news['web_url'],
+                title: Arr::get($news,'headline.main'),
+                content: Arr::get($news,'abstract', ''),
+                url: Arr::get($news,'web_url'),
                 imagePath: Arr::get($news,'multimedia.0.url'),
-                category: $news['section_name'],
+                category: Arr::get($news,'section_name'),
                 source: NewsSources::NY_TIMES->value
             );
         }

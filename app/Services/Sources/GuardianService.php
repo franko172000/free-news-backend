@@ -30,13 +30,16 @@ class GuardianService extends NewsAbstractApiService implements NewsSourceHandle
         $articles = Arr::get($data, 'response.results', []);
 
         foreach ($articles as $article){
-            $formatted[] = new NewsDto(
-                title: Arr::get($article,'webTitle'),
-                content: Arr::get($article,'webTitle'),
-                url: Arr::get($article,'webUrl'),
-                source: NewsSources::GUARDIAN->value,
-                category: Arr::get($article,'sectionName'),
-            );
+            $title = Arr::get($article,'webTitle');
+            if($title){
+                $formatted[] = new NewsDto(
+                    title: Arr::get($article,'webTitle'),
+                    content: Arr::get($article,'webTitle', ''),
+                    url: Arr::get($article,'webUrl'),
+                    source: NewsSources::GUARDIAN->value,
+                    category: Arr::get($article,'sectionName'),
+                );
+            }
         }
         return $formatted;
     }
