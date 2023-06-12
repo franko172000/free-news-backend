@@ -32,4 +32,4 @@ If you are on a windows machine, you will have to start the containers yourself.
 If you followed the steps above, you should be able to access the laravel app on your browser with the base url below
 
 ## Base url
-http://localhost:8070
+Open [http://localhost:8070](http://localhost:8070)
