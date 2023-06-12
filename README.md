@@ -20,9 +20,9 @@ Clone this repository, navigate to the repository root and run the following com
 ```
 
 ## Set up Windows
-If you are on a windows machine, you will have to start the containers yourself. Please follow these easy steps to the app up and running.
+If you are on a windows machine, you will have to start the containers yourself. Please follow these easy steps to get the app up and running.
 
-1. ``cd`` in to the cloned repository and run
+1. ``cd`` in to the cloned repository and run:
 2. ```bash
     docker-compose --env-file ./.env.docker up --build -d
     ```

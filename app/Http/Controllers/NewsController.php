@@ -6,11 +6,17 @@ use App\Actions\ListNewsAction;
 use App\Http\Resources\NewsResource;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Arr;
 
 class NewsController extends Controller
 {
-    public function index(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     * @throws \Exception
+     */
+    public function index(Request $request): AnonymousResourceCollection
     {
         $data = [];
         $searchTerm = Arr::get($request->input(), 'term');

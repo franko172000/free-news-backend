@@ -28,7 +28,6 @@ abstract class BaseApiService
     protected function url(string $url, array $endpointParameters = []): string
     {
         if (!empty($endpointParameters)) {
-            //$url = Arr::query($endpointParameters);
             $url = url($url, Arr::query($endpointParameters));
         }
 

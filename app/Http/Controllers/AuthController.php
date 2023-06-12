@@ -7,6 +7,7 @@ use App\Actions\User\LoginUserAction;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -17,9 +18,11 @@ class AuthController extends Controller
     private const TOKEN_NAME = 'API TOKEN';
 
     /**
-     * @throws ValidationException
+     * @param LoginRequest $request
+     * @return JsonResponse
+     * @throws \Exception
      */
-    public function login(LoginRequest $request): \Illuminate\Http\JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         $data = $request->validated();
         $token = LoginUserAction::run([
@@ -32,7 +35,12 @@ class AuthController extends Controller
         ],"Access token");
     }
 
-    public function register(RegisterRequest $request): \Illuminate\Http\JsonResponse
+    /**
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function register(RegisterRequest $request): JsonResponse
     {
         $data = $request->validated();
         $token = CreateUserAction::run([
@@ -46,7 +54,10 @@ class AuthController extends Controller
         ],"Access token");
     }
 
-    public function logout(): \Illuminate\Http\JsonResponse
+    /**
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
     {
         request()->user()->tokens()->delete();
         return $this->respondSuccess(message: "Logout successful!");

@@ -8,18 +8,25 @@ use App\Http\Requests\UpdatePreferenceRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\UserResource;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     use ApiResponseTrait;
+
     public function index(): UserResource
     {
         $user = request()->user();
         return new UserResource($user);
     }
 
-    public function updateProfile(UpdateProfileRequest $request): \Illuminate\Http\JsonResponse
+    /**
+     * @param UpdateProfileRequest $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function updateProfile(UpdateProfileRequest $request): JsonResponse
     {
         $status = UpdateProfileAction::run([
             'user' => $request->user(),
@@ -33,7 +40,12 @@ class UserController extends Controller
         return $this->respondInternalError("Unexpected error. Please try again");
     }
 
-    public function updatePreference(UpdatePreferenceRequest $request): \Illuminate\Http\JsonResponse
+    /**
+     * @param UpdatePreferenceRequest $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function updatePreference(UpdatePreferenceRequest $request): JsonResponse
     {
         $status = UpdatePreferenceAction::run([
             'user' => $request->user(),
